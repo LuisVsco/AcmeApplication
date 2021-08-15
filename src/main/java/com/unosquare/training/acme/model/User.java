@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -14,10 +16,12 @@ public class User {
     private Integer id;
     private String name;
     private String school;
-    @OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "roleId", nullable = false)
-    @JsonSerialize(as=Role.class)
+    @JsonSerialize(as = Role.class)
     private Role role;
+    @OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Course> courses = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

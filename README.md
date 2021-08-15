@@ -25,4 +25,4 @@ mvn spring-boot:run
 
 Luis Velasco
 
-GitHub profile:  https://github.com/LuisVsco‣捁敭灁汰捩瑡潩੮
+GitHub profile: https://github.com/LuisVsco
