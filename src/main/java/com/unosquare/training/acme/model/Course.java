@@ -1,7 +1,9 @@
 package com.unosquare.training.acme.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -12,9 +14,11 @@ public class Course {
     private Date creationDate;
     private Date startDate;
     private String status;
-    @ManyToOne(targetEntity=User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name="userId")
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
     private User user;
+    @OneToMany(targetEntity = Enrollment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "course")
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -62,5 +66,13 @@ public class Course {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 }
