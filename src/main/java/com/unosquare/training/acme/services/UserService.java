@@ -43,4 +43,16 @@ public class UserService {
         userDto.setRole(user.getRole());
         return userDto;
     }
+    public UserDto GetUserByUserName(final String username){
+        User user = userRepository.getUserByUserName(username);
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setSchool(user.getSchool());
+        userDto.setRole(user.getRole());
+        userDto.setUsername(user.getUsername());
+        userDto.setPassword(user.getPassword());
+        return userDto;
+    }
+
 }
