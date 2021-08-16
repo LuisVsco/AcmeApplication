@@ -1,6 +1,7 @@
 package com.unosquare.training.acme.model;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 public class Enrollment {
@@ -8,11 +9,11 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String status;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
     @JoinColumn(name = "studentId")
     private User student;
-    @ManyToOne(fetch = FetchType.LAZY,targetEntity = Course.class)
-    @JoinColumn(name="courseId")
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Course.class)
+    @JoinColumn(name = "courseId")
     private Course course;
 
 
@@ -22,6 +23,14 @@ public class Enrollment {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public User getStudent() {

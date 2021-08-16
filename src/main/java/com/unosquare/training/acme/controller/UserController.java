@@ -1,5 +1,6 @@
 package com.unosquare.training.acme.controller;
 
+import com.unosquare.training.acme.dto.UserDto;
 import com.unosquare.training.acme.model.User;
 import com.unosquare.training.acme.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/user")
-    public User SaveUser(@RequestBody User user) {
-        return userService.SaveUser(user);
+    public UserDto SaveUser(@RequestBody UserDto userDto) {
+        return userService.SaveUser(userDto);
     }
 
     @GetMapping(value = "/user")
-    public User GetUser(@RequestParam final Integer id) {
+    public UserDto GetUser(@RequestParam final Integer id) {
 
         return userService.GetUserById(id);
     }

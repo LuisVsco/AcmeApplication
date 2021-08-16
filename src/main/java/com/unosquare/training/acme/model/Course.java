@@ -1,5 +1,8 @@
 package com.unosquare.training.acme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +19,10 @@ public class Course {
     private String status;
     @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
+    @JsonManagedReference
     private User user;
     @OneToMany(targetEntity = Enrollment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "course")
+    @JsonManagedReference
     private List<Enrollment> enrollments = new ArrayList<>();
 
     public Integer getId() {

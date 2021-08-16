@@ -1,5 +1,6 @@
 package com.unosquare.training.acme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
@@ -14,13 +15,14 @@ public class User {
     private Integer id;
     private String name;
     private String school;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "roleId", nullable = false)
-    @JsonSerialize(as = Role.class)
-    private Role role;
+    private String role;
+    private String username;
+    private String password;
     @OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    //@JsonBackReference
     private List<Course> courses = new ArrayList<>();
     @OneToMany(targetEntity = Enrollment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
+    //@JsonBackReference
     private List<Enrollment> enrollments = new ArrayList<>();
 
     public Integer getId() {
@@ -47,12 +49,28 @@ public class User {
         this.school = school;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Course> getCourses() {
