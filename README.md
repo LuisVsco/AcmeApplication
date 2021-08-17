@@ -20,7 +20,7 @@ mvn clean install
 ```
 mvn spring-boot:run
 ```
-
+* Use the collection in the folder postman to import requests to your postman.
 ## Authors
 
 Luis Velasco

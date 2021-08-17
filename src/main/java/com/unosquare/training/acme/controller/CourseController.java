@@ -17,8 +17,12 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping(value = "/course")
-    public void SaveCourse(@RequestBody CourseDto course) {
-        courseService.SaveCourse(course);
+    public ResponseEntity<Object> SaveCourse(@RequestBody CourseDto course) {
+        CourseDto savedCourse=  courseService.SaveCourse(course);
+        if (savedCourse.getId()!=null){
+            return ResponseEntity.ok().body(savedCourse);
+        }
+        return ResponseEntity.badRequest().body("You have no rights to do this");
     }
 
     @GetMapping(value = "/list/course/student")

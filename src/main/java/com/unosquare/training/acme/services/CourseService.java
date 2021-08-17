@@ -21,7 +21,7 @@ public class CourseService {
     @Autowired
     private UserService userService;
 
-    public void SaveCourse(CourseDto courseDto) {
+    public CourseDto SaveCourse(CourseDto courseDto) {
         if (courseDto.getUser().getRole().equalsIgnoreCase("instructor")) {
             User instructor = new User();
             instructor.setId(courseDto.getUser().getId());
@@ -34,8 +34,11 @@ public class CourseService {
             course.setUser(instructor);
             course.setStartDate(courseDto.getStartDate());
             course.setCreationDate(courseDto.getCreationDate());
-            courseRepository.save(course);
+            course.setId(courseRepository.save(course).getId());
+            courseDto.setId(course.getId());
+            return courseDto;
         }
+        return new CourseDto();
     }
 
     public Course GetCourseById(final Integer idCourse) {
